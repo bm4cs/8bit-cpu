@@ -1,9 +1,6 @@
 
-digits = [b'\x7e', b'\x30', b'\x6d', b'\x79', b'\x33',
-          b'\x5b', b'\x5f', b'\x70', b'\x7f', b'\x7b']
-
-
-def print_bytes_list(buffer: list):
+def print_bytes(buffer: list):
+    '''Prints binary list as hex, 16 bytes per line.'''
     for i, byte in enumerate(buffer):
 
         line_break = (i + 1) % 16 == 0
@@ -18,15 +15,20 @@ def print_bytes_list(buffer: list):
 
 
 def write_bytes(buffer: list):
-    print('Programming ones place')
+    '''Binary to decimal (7 segment) mapping.'''
+
+    digits = [b'\x7e', b'\x30', b'\x6d', b'\x79', b'\x33',
+              b'\x5b', b'\x5f', b'\x70', b'\x7f', b'\x7b']
+
+    # ones place
     for i in range(256):
         buffer[i] = digits[i % 10]
 
-    print('Programming tens place')
+    # tens place
     for i in range(256):
         buffer[i + 256] = digits[int(i / 10) % 10]
 
-    print('Programming hundreds place')
+    # hundreds place
     for i in range(256):
         buffer[i + 512] = digits[int(i / 100) % 10]
 
@@ -34,4 +36,4 @@ def write_bytes(buffer: list):
 if __name__ == '__main__':
     buffer = [b'\x00'] * 2048
     write_bytes(buffer)
-    print_bytes_list(buffer)
+    print_bytes(buffer)
