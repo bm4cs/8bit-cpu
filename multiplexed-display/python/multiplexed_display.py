@@ -1,3 +1,14 @@
+'''
+    File name: multiplexed_display.py
+    Author: Benjamin Simmonds
+    Date created: 2022-07-17
+    Date last modified: 2022-08-24
+    Python Version: 3.10
+    Description: Converts an integer (<256) to its binary 
+                 represention, for use on 7 segment displays.
+                 See https://eater.net/8bit
+'''
+
 
 def print_bytes(buffer: list):
     '''Prints binary list as hex, 16 bytes per line.'''
@@ -37,3 +48,7 @@ if __name__ == '__main__':
     buffer = [b'\x00'] * 2048
     write_bytes(buffer)
     print_bytes(buffer)
+    with open("7seg-decoder.bin", "wb") as out_file:
+        for byte in buffer:
+            print(byte.hex())
+            out_file.write(byte)
