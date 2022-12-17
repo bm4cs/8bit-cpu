@@ -87,9 +87,9 @@ def write_bitmap_for_twos_complement(buffer: list):
     # sign for twos complement
     for i in range(-128, 128):
         if i < 0:
-            buffer[i + 1792] = b'\x01'  # 0x01 = g segment (negative symbol)
+            buffer[get_address_for_twos_value(i) + 1792] = b'\x01'  # 0x01 = g segment (negative symbol)
         else:
-            buffer[i + 1792] = b'\x00'
+            buffer[get_address_for_twos_value(i) + 1792] = b'\x00'
 
 
 def print_bytes(buffer: list):
